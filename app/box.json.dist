@@ -1,0 +1,16 @@
+{
+  "main": "bin/console",
+  "output": "../bin/php-console-app",
+  "files-bin": [
+    ".env.local.php"
+  ],
+  "directories": [
+    "config",
+    "var"
+  ],
+  "compression": "GZ",
+  "force-autodiscovery": true,
+  "check-requirements": false,
+  "exclude-composer-files": false,
+  "datetime": "release-date"
+}
