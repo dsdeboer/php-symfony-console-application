@@ -5,5 +5,7 @@ declare(strict_types=1);
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 
 return [
-    FrameworkBundle::class => ['all' => true],
+    FrameworkBundle::class => [
+        'all' => true,
+    ],
 ];
