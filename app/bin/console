@@ -3,19 +3,27 @@
 
 use App\Kernel;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Component\Dotenv\Dotenv;
 
-if (!is_dir(dirname(__DIR__).'/vendor')) {
-    throw new LogicException('Dependencies are missing. Try running "composer install".');
-}
+$_SERVER['APP_SCRIPT_FILENAME'] = __FILE__;
 
-if (!is_file(dirname(__DIR__).'/vendor/autoload_runtime.php')) {
+if (!is_file(dirname(__DIR__) . '/vendor/autoload_runtime.php')) {
     throw new LogicException('Symfony Runtime is missing. Try running "composer require symfony/runtime".');
 }
 
-require_once dirname(__DIR__).'/vendor/autoload_runtime.php';
+require_once dirname(__DIR__) . '/vendor/autoload_runtime.php';
 
-return function (array $context) {
-    $kernel = new Kernel($context['APP_ENV'], (bool) $context['APP_DEBUG']);
+if (Phar::running()) {
+    $configFile = dirname(Phar::running(false)) . '/.simplicate_profile';
+    if (!file_exists($configFile)) {
+        touch($configFile);
+    }
+    (new Dotenv())->load($configFile);
+}
+
+
+return static function (array $context) {
+    $kernel = new Kernel($context['APP_ENV'], (bool)$context['APP_DEBUG']);
 
     return new Application($kernel);
 };
