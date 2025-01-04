@@ -55,6 +55,10 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "build-phar": [
+            "composer dump-env prod",
+            "box compile"
         ]
     },
     "conflict": {
