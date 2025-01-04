@@ -63,3 +63,12 @@ Steps to get started:
    ```shell
    ./bin/spc micro:combine bin/php-console-app --output bin/php-console-bin
    ```
+   
+5. Test your newly build binary by running 
+   ```shell
+   ./bin/php-console-bin app:hello-world
+   
+   # Expected output: 
+   Warning: The console should be invoked via the CLI version of PHP, not the micro SAPI
+   Hello World!
+   ```
