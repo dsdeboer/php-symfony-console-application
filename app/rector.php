@@ -18,4 +18,5 @@ return RectorConfig::configure()
     ->withImportNames()
     ->withFluentCallNewLine()
     ->withDeadCodeLevel(0)
-    ->withCodeQualityLevel(0);
+    ->withCodeQualityLevel(0)
+;
