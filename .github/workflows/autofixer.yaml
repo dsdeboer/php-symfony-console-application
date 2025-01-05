@@ -49,3 +49,24 @@ jobs:
           commit_message: '[ecs] Easy Coding Standard fixes'
           commit_author: 'GitHub Action <actions@github.com>'
           commit_user_email: 'action@github.com'
+
+  linters:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.RECTOR_ACCESS_TOKEN }}
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version-file: .php-version
+          coverage: none
+
+      - uses: "ramsey/composer-install@v3"
+        with:
+          working-directory: app
+
+      - name: "Composer normalize"
+        run: composer --working-dir app normalize
+      - name: "Composer validate"
+        run: composer --working-dir app validate --strict
