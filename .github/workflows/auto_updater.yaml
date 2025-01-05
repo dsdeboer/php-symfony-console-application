@@ -1,10 +1,8 @@
 name: Auto Update packages
 
 on:
-  push:
-    branches:
-      - auto-update-changes
-  workflow_dispatch: ~
+  schedule:
+    - cron: "? 15 * * 0"
 
 permissions:
   contents: write
@@ -39,6 +37,8 @@ jobs:
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.RECTOR_ACCESS_TOKEN }}
+          reviewers: 'dsdeboer'
           title: "[chore] Automatic scheduled composer upgrade"
-          commit-message: "[ci skip] Automatic composer upgrade"
+          body: "chore: Automatic composer upgrade"
+          commit-message: "[ci] Automatic composer upgrade"
           branch: "chore/scheduled-composer-upgrade"
