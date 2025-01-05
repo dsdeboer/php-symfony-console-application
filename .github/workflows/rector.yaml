@@ -1,0 +1,57 @@
+name: Rector && ECS
+
+on:
+    pull_request: null
+
+jobs:
+    rector_and_ecs:
+        runs-on: ubuntu-latest
+        if: github.event.pull_request.head.repo.full_name == 'dsdeboer/php-symfony-console-application'
+        steps:
+            -
+                if: github.event.pull_request.head.repo.full_name == github.repository
+                uses: actions/checkout@v4
+                with:
+                    token: ${{ secrets.RECTOR_ACCESS_TOKEN }}
+
+            -
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version-file: .php-version
+                    coverage: none
+
+            -   uses: "ramsey/composer-install@v3"
+                with:
+                    working-directory: app
+
+            -   uses: actions/cache@v4
+                with:
+                  path: ./app/var/cache/rector
+                  key: ${{ runner.os }}-rector-${{ github.run_id }}
+                  restore-keys: ${{ runner.os }}-rector-
+
+            -   run: vendor/bin/rector --ansi
+                with:
+                    working-directory: app
+
+            -   uses: stefanzweifel/git-auto-commit-action@v5
+                with:
+                    commit_message: '[rector] Rector fixes'
+                    commit_author: 'GitHub Action <actions@github.com>'
+                    commit_user_email: 'action@github.com'
+
+            -   uses: actions/cache@v4
+                with:
+                    path: ./app/var/cache/ecs
+                    key: ${{ runner.os }}-rector-${{ github.run_id }}
+                    restore-keys: ${{ runner.os }}-rector-
+
+            -   run: vendor/bin/ecs --ansi --output-format=checkstyle
+                with:
+                    working-directory: app
+
+            -   uses: stefanzweifel/git-auto-commit-action@v5
+                with:
+                    commit_message: '[ecs] Easy Coding Standard fixes'
+                    commit_author: 'GitHub Action <actions@github.com>'
+                    commit_user_email: 'action@github.com'
