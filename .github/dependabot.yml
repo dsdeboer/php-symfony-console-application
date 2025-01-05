@@ -1,0 +1,14 @@
+# Set update schedule for GitHub Actions
+
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    reviewers:
+      - "dsdeboer"
+    schedule:
+      interval: "weekly"
+    groups:
+      github-actions:
+        patterns:
+          - "*"

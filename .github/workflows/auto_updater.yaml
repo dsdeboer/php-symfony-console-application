@@ -1,10 +1,16 @@
 name: Auto Update packages
 
 on:
-  workflow_dispatch: ~
+  schedule:
+    - cron: "? 15 * * 0"
+
+permissions:
+  contents: write
+  pull-requests: write
 
 jobs:
-  fixers:
+  autoupdater:
+    name: "Update composer packages"
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
@@ -24,11 +30,15 @@ jobs:
       # Automatically run composer upgrade
       - name: Upgrade dependencies
         id: composer-update
-        run: echo "composer_output='$(composer update --no-ansi --no-interaction --no-scripts --no-install --no-audit --no-progress --ignore-platform-req=ext-* 2>&1)'" >> "$GITHUB_OUTPUT"
+        run: composer update --no-ansi --no-interaction --no-scripts --no-install --no-audit --no-progress --ignore-platform-req=ext-*
+        working-directory: app
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
         with:
+          token: ${{ secrets.RECTOR_ACCESS_TOKEN }}
+          reviewers: 'dsdeboer'
           title: "[chore] Automatic scheduled composer upgrade"
-          commit-message: ${{ steps.composer-update.outputs.composer_output }}
+          body: "chore: Automatic composer upgrade"
+          commit-message: "[ci] Automatic composer upgrade"
           branch: "chore/scheduled-composer-upgrade"
