@@ -70,3 +70,9 @@ jobs:
         run: composer --working-dir app normalize
       - name: "Composer validate"
         run: composer --working-dir app validate --strict
+      - name: "Class leak detection"
+        run: vendor/bin/class-leak check bin config src
+        working-directory: app
+      - name: "Dependency scanner"
+        run: vendor/bin/composer-dependency-analyser
+        working-directory: app
