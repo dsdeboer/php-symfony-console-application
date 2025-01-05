@@ -1,0 +1,69 @@
+name: Auto fix common mistakes
+
+on:
+  pull_request: null
+
+jobs:
+  rector:
+    name: "Rector Autofixer"
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.RECTOR_ACCESS_TOKEN }}
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version-file: .php-version
+          coverage: none
+
+      - uses: "ramsey/composer-install@v3"
+        with:
+          working-directory: app
+
+      - uses: actions/cache@v4
+        with:
+          path: app/var/cache/rector
+          key: ${{ runner.os }}-rector-${{ github.run_id }}
+          restore-keys: ${{ runner.os }}-rector-
+
+      - run: vendor/bin/rector --ansi
+        working-directory: app
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: '[rector] Rector fixes'
+          commit_author: 'GitHub Action <actions@github.com>'
+          commit_user_email: 'action@github.com'
+
+  easy_coding_standard:
+    name: "Easy Coding Standards Autofixer"
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.RECTOR_ACCESS_TOKEN }}
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version-file: .php-version
+          coverage: none
+
+      - uses: "ramsey/composer-install@v3"
+        with:
+          working-directory: app
+
+      - uses: actions/cache@v4
+        with:
+          path: app/var/cache/ecs
+          key: ${{ runner.os }}-ecs-${{ github.run_id }}
+          restore-keys: ${{ runner.os }}-ecs-
+
+      - run: vendor/bin/ecs check --output-format=checkstyle
+        working-directory: app
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: '[ecs] Easy Coding Standard fixes'
+          commit_author: 'GitHub Action <actions@github.com>'
+          commit_user_email: 'action@github.com'
