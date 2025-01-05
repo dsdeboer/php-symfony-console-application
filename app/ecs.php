@@ -7,7 +7,7 @@ use Symplify\EasyCodingStandard\Config\ECSConfig;
 use Symplify\EasyCodingStandard\ValueObject\Option;
 
 return ECSConfig::configure()
-    ->withCache(directory: __DIR__.'/var/cache/ecs')
+    ->withCache(directory: __DIR__ . '/var/cache/ecs')
     ->withPaths([
         __DIR__ . '/bin',
         __DIR__ . '/config',
