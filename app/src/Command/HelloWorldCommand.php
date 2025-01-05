@@ -16,7 +16,8 @@ class HelloWorldCommand extends Command
     {
         $this
             ->setDescription('Prints Hello World')
-            ->setHelp('This command allows you to print Hello World...');
+            ->setHelp('This command allows you to print Hello World...')
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

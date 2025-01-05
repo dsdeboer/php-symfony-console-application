@@ -6,7 +6,7 @@ use Rector\Caching\ValueObject\Storage\FileCacheStorage;
 use Rector\Config\RectorConfig;
 
 return RectorConfig::configure()
-    ->withCache(cacheDirectory: __DIR__.'/var/cache/rector', cacheClass: FileCacheStorage::class)
+    ->withCache(cacheDirectory: __DIR__ . '/var/cache/rector', cacheClass: FileCacheStorage::class)
     ->withPaths([
         __DIR__ . '/bin',
         __DIR__ . '/config',
@@ -18,4 +18,5 @@ return RectorConfig::configure()
     ->withImportNames()
     ->withFluentCallNewLine()
     ->withDeadCodeLevel(0)
-    ->withCodeQualityLevel(0);
+    ->withCodeQualityLevel(0)
+;
