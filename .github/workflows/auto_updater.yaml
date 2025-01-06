@@ -36,6 +36,8 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
         with:
+          author: 'GitHub Action <actions@github.com>'
+          committer: 'GitHub Action <actions@github.com>'
           token: ${{ secrets.RECTOR_ACCESS_TOKEN }}
           reviewers: 'dsdeboer'
           title: "[chore] Automatic scheduled composer upgrade"
