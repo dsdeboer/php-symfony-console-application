@@ -13,17 +13,17 @@ jobs:
     name: "Update composer packages"
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4.2.2
         with:
           token: ${{ secrets.RECTOR_ACCESS_TOKEN }}
 
-      - uses: shivammathur/setup-php@v2
+      - uses: shivammathur/setup-php@9e72090525849c5e82e596468b86eb55e9cc5401
         with:
           php-version-file: .php-version
           coverage: none
           tools: composer:v2
 
-      - uses: "ramsey/composer-install@v3"
+      - uses: ramsey/composer-install@57532f8be5bda426838819c5ee9afb8af389d51a
         with:
           working-directory: app
 
@@ -34,7 +34,7 @@ jobs:
         working-directory: app
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v7.0.6
         with:
           author: Duncan de Boer <duncan-charpand@users.noreply.github.com>
           committer: Duncan de Boer <duncan-charpand@users.noreply.github.com>

@@ -3,25 +3,29 @@ name: Auto fix common mistakes
 on:
   pull_request: null
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   fixers:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4.2.2
         with:
           token: ${{ secrets.RECTOR_ACCESS_TOKEN }}
 
-      - uses: shivammathur/setup-php@v2
+      - uses: shivammathur/setup-php@9e72090525849c5e82e596468b86eb55e9cc5401
         with:
           php-version-file: .php-version
           coverage: none
           tools: composer:v2
 
-      - uses: "ramsey/composer-install@v3"
+      - uses: ramsey/composer-install@57532f8be5bda426838819c5ee9afb8af389d51a
         with:
           working-directory: app
 
-      - uses: actions/cache@v4
+      - uses: actions/cache@v4.2.0
         with:
           path: app/var/cache/rector
           key: ${{ runner.os }}-rector-${{ github.run_id }}
@@ -30,13 +34,13 @@ jobs:
       - run: vendor/bin/rector --ansi
         working-directory: app
 
-      - uses: stefanzweifel/git-auto-commit-action@v5
+      - uses: stefanzweifel/git-auto-commit-action@e348103e9026cc0eee72ae06630dbe30c8bf7a79
         with:
           commit_message: '[rector] Rector fixes'
           commit_author: 'GitHub Action <actions@github.com>'
           commit_user_email: 'action@github.com'
 
-      - uses: actions/cache@v4
+      - uses: actions/cache@v4.2.0
         with:
           path: app/var/cache/ecs
           key: ${{ runner.os }}-ecs-${{ github.run_id }}
@@ -45,7 +49,7 @@ jobs:
       - run: vendor/bin/ecs check --fix --output-format=checkstyle
         working-directory: app
 
-      - uses: stefanzweifel/git-auto-commit-action@v5
+      - uses: stefanzweifel/git-auto-commit-action@e348103e9026cc0eee72ae06630dbe30c8bf7a79
         with:
           commit_message: '[ecs] Easy Coding Standard fixes'
           commit_author: 'GitHub Action <actions@github.com>'
@@ -54,17 +58,17 @@ jobs:
   linters:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4.2.2
         with:
           token: ${{ secrets.RECTOR_ACCESS_TOKEN }}
 
-      - uses: shivammathur/setup-php@v2
+      - uses: shivammathur/setup-php@9e72090525849c5e82e596468b86eb55e9cc5401
         with:
           php-version-file: .php-version
           coverage: none
           tools: composer:v2
 
-      - uses: "ramsey/composer-install@v3"
+      - uses: ramsey/composer-install@57532f8be5bda426838819c5ee9afb8af389d51a
         with:
           working-directory: app
 
