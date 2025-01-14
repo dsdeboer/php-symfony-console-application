@@ -3,6 +3,10 @@ name: Auto fix common mistakes
 on:
   pull_request: null
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   fixers:
     runs-on: ubuntu-24.04
