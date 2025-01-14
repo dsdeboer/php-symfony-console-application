@@ -2,7 +2,7 @@ name: Auto Update packages
 
 on:
   schedule:
-    - cron: "? 15 * * 0"
+    - cron: "? 8,15 * * *"
 
 permissions:
   contents: write
@@ -36,8 +36,8 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
         with:
-          author: 'GitHub Action <actions@github.com>'
-          committer: 'GitHub Action <actions@github.com>'
+          author: Duncan de Boer <duncan-charpand@users.noreply.github.com>
+          committer: Duncan de Boer <duncan-charpand@users.noreply.github.com>
           token: ${{ secrets.RECTOR_ACCESS_TOKEN }}
           reviewers: 'dsdeboer'
           title: "[chore] Automatic scheduled composer upgrade"
