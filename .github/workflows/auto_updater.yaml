@@ -17,13 +17,13 @@ jobs:
         with:
           token: ${{ secrets.RECTOR_ACCESS_TOKEN }}
 
-      - uses: shivammathur/setup-php@v2.32.0
+      - uses: shivammathur/setup-php@9e72090525849c5e82e596468b86eb55e9cc5401
         with:
           php-version-file: .php-version
           coverage: none
           tools: composer:v2
 
-      - uses: ramsey/composer-install@v3.0.0
+      - uses: ramsey/composer-install@57532f8be5bda426838819c5ee9afb8af389d51a
         with:
           working-directory: app
 
