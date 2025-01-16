@@ -23,7 +23,7 @@
         "shipmonk/composer-dependency-analyser": "^1.8.2",
         "symplify/config-transformer": "^12.3.4",
         "symplify/easy-coding-standard": "^12.5.5",
-        "tomasvotruba/class-leak": "^2.0"
+        "tomasvotruba/class-leak": "^2.0.3"
     },
     "replace": {
         "symfony/polyfill-ctype": "*",
