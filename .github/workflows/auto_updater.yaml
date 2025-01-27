@@ -35,10 +35,8 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@67ccf781d68cd99b580ae25a5c18a1cc84ffff1f
         with:
-          author: Duncan de Boer <duncan-charpand@users.noreply.github.com>
-          committer: Duncan de Boer <duncan-charpand@users.noreply.github.com>
           token: ${{ secrets.RECTOR_ACCESS_TOKEN }}
-          reviewers: 'dsdeboer'
+          reviewers: 'duncan-charpand'
           title: "[chore] Automatic scheduled composer upgrade"
           body: "chore: Automatic composer upgrade"
           commit-message: "[ci] Automatic composer upgrade"
