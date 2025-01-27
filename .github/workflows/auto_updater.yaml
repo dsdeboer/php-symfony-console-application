@@ -79,4 +79,3 @@ jobs:
           reviewers: 'duncan-charpand'
           title: "[chore] Automatic scheduled composer upgrade"
           body: "chore: Automatic composer upgrade"
-          branch: "chore/scheduled-composer-upgrade-${{ github.run_number }}"
