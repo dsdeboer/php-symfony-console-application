@@ -71,8 +71,8 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@dd2324fc52d5d43c699a5636bcf19fceaa70c284
         with:
+          delete-branch: 'true'
           token: ${{ secrets.RECTOR_ACCESS_TOKEN }}
-          reviewers: 'duncan-charpand'
           title: "[chore] Automatic scheduled composer upgrade"
           body: "chore: Automatic composer upgrade"
           branch: "chore/scheduled-composer-upgrade-${{ github.run_number }}"
