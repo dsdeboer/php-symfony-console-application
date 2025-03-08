@@ -84,12 +84,6 @@
         ],
         "auto-scripts": {
             "cache:clear": "symfony-cmd"
-        },
-        "build-phar": [
-            "composer install --no-dev",
-            "composer dump-env prod",
-            "box compile",
-            "composer install"
-        ]
+        }
     }
 }
