@@ -34,10 +34,12 @@ Steps to get started:
 
 2. Prepare the redistributable PHP-binaries
    ```shell
+    php_version=$(cat .php-version)
     php_extensions="bcmath,bz2,ctype,curl,dom,exif,fileinfo,filter,gd,iconv,intl,mbregex,mbstring,openssl,pcntl,pdo,pdo_sqlite,phar,posix,readline,redis,sockets,sodium,sqlite3,tokenizer,zip,zlib"
     
    # Download all needed sources
     ./bin/spc download \
+      --with-php=$php_version \
       --ignore-cache-sources=php-src \
       --for-extensions="$php_extensions" \
       --prefer-pre-built
@@ -52,11 +54,10 @@ Steps to get started:
 3. To build the project into an archive
    ```shell
    # Step by Step
+   composer --working-dir=app install --no-dev
    composer --working-dir=app dump-env prod
    box compile --working-dir=app
-   
-   # or with composer script
-   composer --working-dir=app build-phar
+   composer --working-dir=app install
    ```
    
 4. Finalize by putting it all together

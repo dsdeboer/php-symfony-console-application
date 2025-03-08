@@ -6,12 +6,12 @@
     "require": {
         "php": "~8.4.0",
         "symfony/console": "~7.2.1",
-        "symfony/dotenv": "7.2.*",
+        "symfony/dotenv": "~7.2.0",
         "symfony/flex": "^2.5.0",
         "symfony/framework-bundle": "~7.2.4",
-        "symfony/http-kernel": "7.2.*",
+        "symfony/http-kernel": "~7.2.4",
         "symfony/runtime": "~7.2.3",
-        "symfony/yaml": "7.2.*"
+        "symfony/yaml": "~7.2.3"
     },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.45",
@@ -86,8 +86,10 @@
             "cache:clear": "symfony-cmd"
         },
         "build-phar": [
+            "composer install --no-dev",
             "composer dump-env prod",
-            "box compile"
+            "box compile",
+            "composer install"
         ]
     }
 }
