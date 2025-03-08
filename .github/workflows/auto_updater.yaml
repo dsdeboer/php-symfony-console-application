@@ -28,8 +28,11 @@ jobs:
 
       # Automatically run composer upgrade
       - name: Upgrade dependencies
-        id: composer-update
         run: composer update --no-ansi --no-interaction --no-scripts --no-install --no-audit --no-progress --ignore-platform-req=ext-*
+        working-directory: app
+
+      - name: Normalize composer
+        run: composer normalize
         working-directory: app
 
       - name: Create Pull Request

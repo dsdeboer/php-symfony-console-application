@@ -13,6 +13,7 @@ return RectorConfig::configure()
         __DIR__ . '/src',
     ])
     ->withRootFiles()
+    ->withComposerBased(twig: true, doctrine: true, phpunit: true, symfony: true)
     ->withPhpSets(php84: true)
     ->withPreparedSets(codingStyle: true, typeDeclarations: true, earlyReturn: true, rectorPreset: true, symfonyCodeQuality: true, symfonyConfigs: true)
     ->withImportNames()
