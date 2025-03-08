@@ -32,47 +32,10 @@ jobs:
         run: composer update --no-ansi --no-interaction --no-scripts --no-install --no-audit --no-progress --ignore-platform-req=ext-*
         working-directory: app
 
-      - uses: stefanzweifel/git-auto-commit-action@e348103e9026cc0eee72ae06630dbe30c8bf7a79
-        with:
-          commit_message: '[ci] Automatic composer upgrade'
-          commit_author: 'GitHub Action <actions@github.com>'
-          commit_user_email: 'action@github.com'
-
-      - uses: actions/cache@v4.2.2
-        with:
-          path: app/var/cache/rector
-          key: ${{ runner.os }}-rector-${{ github.run_id }}
-          restore-keys: ${{ runner.os }}-rector-
-
-      - run: vendor/bin/rector --ansi
-        working-directory: app
-
-      - uses: stefanzweifel/git-auto-commit-action@e348103e9026cc0eee72ae06630dbe30c8bf7a79
-        with:
-          commit_message: '[rector] Rector fixes'
-          commit_author: 'GitHub Action <actions@github.com>'
-          commit_user_email: 'action@github.com'
-
-      - uses: actions/cache@v4.2.2
-        with:
-          path: app/var/cache/ecs
-          key: ${{ runner.os }}-ecs-${{ github.run_id }}
-          restore-keys: ${{ runner.os }}-ecs-
-
-      - run: vendor/bin/ecs check --fix --output-format=checkstyle
-        working-directory: app
-
-      - uses: stefanzweifel/git-auto-commit-action@e348103e9026cc0eee72ae06630dbe30c8bf7a79
-        with:
-          commit_message: '[ecs] Easy Coding Standard fixes'
-          commit_author: 'GitHub Action <actions@github.com>'
-          commit_user_email: 'action@github.com'
-
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@dd2324fc52d5d43c699a5636bcf19fceaa70c284
         with:
-          delete-branch: 'true'
           token: ${{ secrets.RECTOR_ACCESS_TOKEN }}
           title: "[chore] Automatic scheduled composer upgrade"
           body: "chore: Automatic composer upgrade"
-          branch: "chore/scheduled-composer-upgrade-${{ github.run_number }}"
+          branch: "chore/scheduled-composer-upgrade"
