@@ -1,6 +1,17 @@
 parameters:
-    level: max
-    paths:
-        - bin/
-        - config/
-        - src/
+  bootstrapFiles:
+    - vendor/autoload.php
+    - vendor/symplify/easy-coding-standard/vendor/squizlabs/php_codesniffer/autoload.php
+  level: max
+
+  reportUnmatchedIgnoredErrors: false
+  treatPhpDocTypesAsCertain: false
+  scanDirectories:
+      - var/cache/dev/Symfony/Config
+  symfony:
+    containerXmlPath: var/cache/dev/App_KernelDevDebugContainer.xml
+  doctrine:
+    objectManagerLoader: tests/object-manager.php
+
+  scanFiles:
+    - vendor/symfony/dependency-injection/Loader/Configurator/ContainerConfigurator.php
