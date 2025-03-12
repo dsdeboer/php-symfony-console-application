@@ -22,7 +22,7 @@ jobs:
           coverage: none
           tools: composer:v2
 
-      - uses: ramsey/composer-install@57532f8be5bda426838819c5ee9afb8af389d51a
+      - uses: ramsey/composer-install@a2636af0004d1c0499ffca16ac0b4cc94df70565
         with:
           working-directory: app
 
@@ -38,7 +38,7 @@ jobs:
       - uses: dsdeboer/composer-require-checker-action@main
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@dd2324fc52d5d43c699a5636bcf19fceaa70c284
+        uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e
         with:
           token: ${{ secrets.RECTOR_ACCESS_TOKEN }}
           title: "[chore] Automatic scheduled composer upgrade"
