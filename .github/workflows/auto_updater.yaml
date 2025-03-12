@@ -35,7 +35,9 @@ jobs:
         run: composer normalize
         working-directory: app
 
-      - uses: dsdeboer/composer-require-checker-action@main
+      - uses: dsdeboer/composer-require-checker-action@1.0.0
+        with:
+          working-dir: app
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e
