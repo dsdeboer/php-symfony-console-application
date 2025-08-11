@@ -11,11 +11,11 @@ jobs:
   fixers:
     runs-on: ubuntu-24.04-arm
     steps:
-      - uses: actions/checkout@v4.2.2
+      - uses: actions/checkout@v5.0.0
         with:
           token: ${{ secrets.RECTOR_ACCESS_TOKEN }}
 
-      - uses: shivammathur/setup-php@ccf2c627fe61b1b4d924adfcbd19d661a18133a0
+      - uses: shivammathur/setup-php@20529878ed81ef8e78ddf08b480401e6101a850f
         with:
           php-version-file: .php-version
           coverage: none
@@ -25,7 +25,7 @@ jobs:
         with:
           working-directory: app
 
-      - uses: actions/cache@v4.2.3
+      - uses: actions/cache@v4.2.4
         with:
           path: app/var/cache/rector
           key: ${{ runner.os }}-rector-${{ github.run_id }}
@@ -40,7 +40,7 @@ jobs:
           commit_author: 'GitHub Action <actions@github.com>'
           commit_user_email: 'action@github.com'
 
-      - uses: actions/cache@v4.2.3
+      - uses: actions/cache@v4.2.4
         with:
           path: app/var/cache/ecs
           key: ${{ runner.os }}-ecs-${{ github.run_id }}
@@ -58,11 +58,11 @@ jobs:
   linters:
     runs-on: ubuntu-24.04-arm
     steps:
-      - uses: actions/checkout@v4.2.2
+      - uses: actions/checkout@v5.0.0
         with:
           token: ${{ secrets.RECTOR_ACCESS_TOKEN }}
 
-      - uses: shivammathur/setup-php@ccf2c627fe61b1b4d924adfcbd19d661a18133a0
+      - uses: shivammathur/setup-php@20529878ed81ef8e78ddf08b480401e6101a850f
         with:
           php-version-file: .php-version
           coverage: none
