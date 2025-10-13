@@ -12,11 +12,11 @@ jobs:
     name: "Update composer packages"
     runs-on: ubuntu-24.04-arm
     steps:
-      - uses: actions/checkout@v4.2.2
+      - uses: actions/checkout@v5.0.0
         with:
           token: ${{ secrets.RECTOR_ACCESS_TOKEN }}
 
-      - uses: shivammathur/setup-php@ccf2c627fe61b1b4d924adfcbd19d661a18133a0
+      - uses: shivammathur/setup-php@bf6b4fbd49ca58e4608c9c89fba0b8d90bd2a39f
         with:
           php-version-file: .php-version
           coverage: none
